@@ -41,6 +41,15 @@ function App() {
     }
   };
 
+  // LOGOUT
+  const handleLogout = () => {
+
+    localStorage.removeItem("token");
+
+    window.location.reload();
+
+  };
+
   // FETCH DASHBOARD DATA
   const fetchDashboard = async () => {
 
@@ -151,6 +160,20 @@ function App() {
     }}>
 
       <h1>Team Task Manager Dashboard</h1>
+
+      <button
+        onClick={handleLogout}
+        style={{
+          padding: "10px",
+          marginBottom: "20px",
+          backgroundColor: "black",
+          color: "white",
+          border: "none",
+          cursor: "pointer"
+        }}
+      >
+        Logout
+      </button>
 
       <div style={{
         background: "white",
