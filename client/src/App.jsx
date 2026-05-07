@@ -191,52 +191,42 @@ function App() {
   // LOGIN PAGE
   if (!token) {
     return (
-      <div style={{
-        fontFamily: "Arial",
-        padding: "40px",
-      }}>
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
 
-        <h1>Team Task Manager</h1>
+        <div className="bg-white p-8 rounded-2xl shadow-lg w-[350px]">
 
-        <form onSubmit={handleLogin} style={{
-          width: "300px",
-        }}>
+          <h1 className="text-3xl font-bold text-center mb-6">
+            Team Task Manager
+          </h1>
 
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "10px",
-              marginBottom: "10px",
-            }}
-          />
+          <form onSubmit={handleLogin} className="space-y-4">
 
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "10px",
-              marginBottom: "10px",
-            }}
-          />
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full border p-3 rounded-lg"
+            />
 
-          <button type="submit" style={{
-            width: "100%",
-            padding: "10px",
-            backgroundColor: "black",
-            color: "white",
-            border: "none",
-          }}>
-            Login
-          </button>
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full border p-3 rounded-lg"
+            />
 
-        </form>
+            <button
+              type="submit"
+              className="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800"
+            >
+              Login
+            </button>
+
+          </form>
+
+        </div>
 
       </div>
     );
@@ -244,97 +234,83 @@ function App() {
 
   // DASHBOARD
   return (
-    <div style={{
-      fontFamily: "Arial",
-      padding: "40px",
-      backgroundColor: "#f5f5f5",
-      minHeight: "100vh",
-    }}>
+    <div className="min-h-screen bg-gray-100 p-8">
 
-      <h1>Team Task Manager Dashboard</h1>
+      <div className="flex justify-between items-center mb-8">
 
-      <button
-        onClick={handleLogout}
-        style={{
-          padding: "10px",
-          marginBottom: "20px",
-          backgroundColor: "black",
-          color: "white",
-          border: "none",
-          cursor: "pointer",
-        }}
-      >
-        Logout
-      </button>
+        <h1 className="text-4xl font-bold">
+          Team Task Dashboard
+        </h1>
+
+        <button
+          onClick={handleLogout}
+          className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+        >
+          Logout
+        </button>
+
+      </div>
 
       {/* DASHBOARD STATS */}
-      <div style={{
-        background: "white",
-        padding: "20px",
-        borderRadius: "10px",
-        marginBottom: "20px",
-        width: "350px",
-      }}>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
 
-        <h2>Dashboard Stats</h2>
+        <div className="bg-white p-6 rounded-2xl shadow">
+          <h2 className="text-gray-500">Total Tasks</h2>
+          <p className="text-3xl font-bold">
+            {dashboard?.totalTasks || 0}
+          </p>
+        </div>
 
-        {dashboard ? (
-          <>
-            <p>Total Tasks: {dashboard.totalTasks}</p>
-            <p>Completed Tasks: {dashboard.completedTasks}</p>
-            <p>Pending Tasks: {dashboard.pendingTasks}</p>
-            <p>Overdue Tasks: {dashboard.overdueTasks}</p>
-          </>
-        ) : (
-          <p>Loading...</p>
-        )}
+        <div className="bg-white p-6 rounded-2xl shadow">
+          <h2 className="text-gray-500">Completed</h2>
+          <p className="text-3xl font-bold text-green-500">
+            {dashboard?.completedTasks || 0}
+          </p>
+        </div>
+
+        <div className="bg-white p-6 rounded-2xl shadow">
+          <h2 className="text-gray-500">Pending</h2>
+          <p className="text-3xl font-bold text-yellow-500">
+            {dashboard?.pendingTasks || 0}
+          </p>
+        </div>
+
+        <div className="bg-white p-6 rounded-2xl shadow">
+          <h2 className="text-gray-500">Overdue</h2>
+          <p className="text-3xl font-bold text-red-500">
+            {dashboard?.overdueTasks || 0}
+          </p>
+        </div>
 
       </div>
 
       {/* CREATE TASK */}
-      <div style={{
-        background: "white",
-        padding: "20px",
-        borderRadius: "10px",
-        marginBottom: "20px",
-        width: "400px",
-      }}>
+      <div className="bg-white p-6 rounded-2xl shadow mb-8 max-w-xl">
 
-        <h2>Create Task</h2>
+        <h2 className="text-2xl font-bold mb-4">
+          Create Task
+        </h2>
 
-        <form onSubmit={createTask}>
+        <form onSubmit={createTask} className="space-y-4">
 
           <input
             type="text"
             placeholder="Task Title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "10px",
-              marginBottom: "10px",
-            }}
+            className="w-full border p-3 rounded-lg"
           />
 
           <textarea
             placeholder="Task Description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "10px",
-              marginBottom: "10px",
-            }}
+            className="w-full border p-3 rounded-lg"
           />
 
           <button
             type="submit"
-            style={{
-              padding: "10px",
-              backgroundColor: "black",
-              color: "white",
-              border: "none",
-            }}
+            className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800"
           >
             Create Task
           </button>
@@ -346,57 +322,59 @@ function App() {
       {/* TASK LIST */}
       <div>
 
-        <h2>Tasks</h2>
+        <h2 className="text-2xl font-bold mb-4">
+          Tasks
+        </h2>
 
-        {tasks.map((task) => (
+        <div className="grid gap-4">
 
-          <div
-            key={task._id}
-            style={{
-              background: "white",
-              padding: "20px",
-              borderRadius: "10px",
-              marginBottom: "15px",
-              width: "400px",
-            }}
-          >
+          {tasks.map((task) => (
 
-            <h3>{task.title}</h3>
-
-            <p>{task.description}</p>
-
-            <p>Status: {task.status}</p>
-
-            <button
-              onClick={() =>
-                updateTaskStatus(task._id, "Completed")
-              }
-              style={{
-                padding: "8px",
-                marginRight: "10px",
-                backgroundColor: "green",
-                color: "white",
-                border: "none",
-              }}
+            <div
+              key={task._id}
+              className="bg-white p-6 rounded-2xl shadow"
             >
-              Complete
-            </button>
 
-            <button
-              onClick={() => deleteTask(task._id)}
-              style={{
-                padding: "8px",
-                backgroundColor: "red",
-                color: "white",
-                border: "none",
-              }}
-            >
-              Delete
-            </button>
+              <h3 className="text-xl font-bold mb-2">
+                {task.title}
+              </h3>
 
-          </div>
+              <p className="text-gray-600 mb-3">
+                {task.description}
+              </p>
 
-        ))}
+              <p className="mb-4">
+                Status:
+                <span className="font-semibold ml-2">
+                  {task.status}
+                </span>
+              </p>
+
+              <div className="flex gap-3">
+
+                <button
+                  onClick={() =>
+                    updateTaskStatus(task._id, "Completed")
+                  }
+                  className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
+                >
+                  Complete
+                </button>
+
+                <button
+                  onClick={() => deleteTask(task._id)}
+                  className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+                >
+                  Delete
+                </button>
+
+              </div>
+
+            </div>
+
+          ))}
+
+        </div>
 
       </div>
 
