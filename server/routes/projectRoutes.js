@@ -6,10 +6,12 @@ const {
 } = require("../controllers/projectController");
 
 const protect = require("../middleware/authMiddleware");
+
 const authorizeRoles = require("../middleware/roleMiddleware");
 
 const router = express.Router();
 
+// ONLY ADMIN CAN CREATE PROJECT
 router.post(
   "/",
   protect,
@@ -17,9 +19,11 @@ router.post(
   createProject
 );
 
+// BOTH ADMIN & MEMBER CAN VIEW PROJECTS
 router.get(
   "/",
   protect,
+  authorizeRoles("admin", "member"),
   getProjects
 );
 
