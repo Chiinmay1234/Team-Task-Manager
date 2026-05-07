@@ -4,33 +4,23 @@ const {
   createTask,
   getTasks,
   updateTaskStatus,
+  deleteTask,
 } = require("../controllers/taskController");
 
 const protect = require("../middleware/authMiddleware");
-const authorizeRoles = require("../middleware/roleMiddleware");
 
 const router = express.Router();
 
-// ADMIN ONLY
-router.post(
-  "/",
-  protect,
-  authorizeRoles("admin"),
-  createTask
-);
+// CREATE TASK
+router.post("/", protect, createTask);
 
-// ALL LOGGED-IN USERS
-router.get(
-  "/",
-  protect,
-  getTasks
-);
+// GET ALL TASKS
+router.get("/", protect, getTasks);
 
-// ALL LOGGED-IN USERS
-router.put(
-  "/:id",
-  protect,
-  updateTaskStatus
-);
+// UPDATE TASK STATUS
+router.put("/:id", protect, updateTaskStatus);
+
+// DELETE TASK
+router.delete("/:id", protect, deleteTask);
 
 module.exports = router;
