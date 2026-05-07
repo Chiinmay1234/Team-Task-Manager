@@ -9,18 +9,40 @@ const {
 
 const protect = require("../middleware/authMiddleware");
 
+const authorizeRoles = require("../middleware/roleMiddleware");
+
 const router = express.Router();
 
-// CREATE TASK
-router.post("/", protect, createTask);
+// ADMIN ONLY → CREATE TASK
+router.post(
+  "/",
+  protect,
+  authorizeRoles("admin"),
+  createTask
+);
 
-// GET ALL TASKS
-router.get("/", protect, getTasks);
+// ADMIN + MEMBER → VIEW TASKS
+router.get(
+  "/",
+  protect,
+  authorizeRoles("admin", "member"),
+  getTasks
+);
 
-// UPDATE TASK STATUS
-router.put("/:id", protect, updateTaskStatus);
+// ADMIN + MEMBER → UPDATE TASK STATUS
+router.put(
+  "/:id",
+  protect,
+  authorizeRoles("admin", "member"),
+  updateTaskStatus
+);
 
-// DELETE TASK
-router.delete("/:id", protect, deleteTask);
+// ADMIN ONLY → DELETE TASK
+router.delete(
+  "/:id",
+  protect,
+  authorizeRoles("admin"),
+  deleteTask
+);
 
 module.exports = router;
