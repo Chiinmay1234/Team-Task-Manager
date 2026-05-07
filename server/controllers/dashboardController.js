@@ -1,6 +1,7 @@
 const Task = require("../models/Task");
 
 const getDashboardData = async (req, res) => {
+
   try {
 
     const totalTasks = await Task.countDocuments();
@@ -32,6 +33,7 @@ const getDashboardData = async (req, res) => {
     });
 
   }
+
 };
 
 module.exports = {
