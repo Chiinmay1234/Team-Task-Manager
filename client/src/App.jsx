@@ -90,11 +90,13 @@ function App() {
 
       const data = await response.json();
 
-      setTasks(data);
+      setTasks(Array.isArray(data) ? data : []);
 
     } catch (error) {
 
       console.log(error);
+
+      setTasks([]);
 
     }
   };
@@ -328,7 +330,7 @@ function App() {
 
         <div className="grid gap-4">
 
-          {tasks.map((task) => (
+          {Array.isArray(tasks) && tasks.map((task) => (
 
             <div
               key={task._id}
